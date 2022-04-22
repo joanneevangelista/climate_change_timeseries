@@ -48,12 +48,51 @@ As there were missing values until March 1978, the dataset was framed to start f
 
 NASA & UK MET DATA
 
-_Time Plot_
+_Time Plots_
 
 As evidenced in the first time plot, the data appears to have an upward trend, but it is not clear whether there is seasonality. For time series analysis, the data must be stationary so transformations were investigated to see which could make the data flatter. Thus, the first difference of the data was taken to remove the trend. In this way, the change in data was viewed month to month, rather than the data itself. As evidenced in the second row of graphs, the data is relatively flat with large fluctuations. 
 
 ![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/Temp_Per_Month.PNG)
 ![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/Change_Temp_Per_Mon.PNG)
+
+_Seasonality Plots_
+
+Now that the data appears trend stationary, seasonality was investidated (i.e. if the large fluctuations happen at the same month every year) or if there is no pattern. For this, a seasonality plot was created. As shown below, the data does not appear to have seasonality as temperatures can be higher or lower in the same month depending on the year. 
+
+![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/Seasonality_NASA.PNG)
+
+![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/Seasonality_MET.PNG)
+
+Another seasonal plot called the subseries plot was also explored. In this graph below, the temperature change in each month (i.e. all the Januarys, Februarys, etc.) is connected with a line which represents the averages. As shown below, there are slight temperature changes each month.
+
+![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/Subseries_Plot.PNG)
+
+_Decomposition_
+
+Finally, the decomposition of the differenced NASA and MET data using STL (season and trend using Loess) was examined. The results are consistent with the analysis above in which the data became trend stationary once the data was transformed. In addition, it is noted that the confidence interval for seasonality is quite large. If there was strong evidence that seasonality was significant, the confidence interval would be much more narrow. 
+
+![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/Diff_Data.PNG)
+
+KINGSTON DATA
+
+_Time Series Plot_
+
+As per the time series plot below, there appears to be seasonality as there is a repeated pattern year over year. Intuitively, this makes sense given that the Kingston area experiences four different seasons every year. Thus, it is clear the predictive model will need to capture the seasonality feature. There does not appear to be a clear pattern of trend, however this can be confirmed with further analysis below. 
+
+![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/Temp_Kingston.PNG)
+
+_Seasonality Plot_
+
+Similar to NASA and UK MET, the seasonality plot and subseries plot can be used to visualize seasonality within the data. As evidenced in this plots, temperature is lowest during the winter months, warmer in the spring, highest in the summer months and cools down in the fall.  
+
+![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/Seasonality_Kingston.PNG)
+
+_Decomposition_
+
+Finally, the decomposition of the Kingston data using STL (season and trend using Loess) was examined. The results are consistent with the analysis above in which the small confidence interval for seasonal supports that there is strong evidence of seasonality. Trend also does not appear to be significant given the wide range of the confidence interval. 
+
+![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/decomposition_Kingston.PNG)
+
 
 
 
