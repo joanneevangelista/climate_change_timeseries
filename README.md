@@ -12,7 +12,7 @@ The objective of this project was to repeat the analysis on the NASA and Met Off
 
 •	Repeat the analysis using the same data but for the time period covered in the infamous bet between University of Pennsylvania Professor J. Scott Armstrong, and former U.S. Vice President, Al Gore and comment. 
 
-**Data sources and preparation**
+**Data Sources and Preparation**
 
 _NASA Data_
 
@@ -44,7 +44,16 @@ For the purpose of this analysis, the following variables were extracted: year, 
 
 As there were missing values until March 1978, the dataset was framed to start from January 1979 and end December 2006 to capture full years. 
 
+**Exploratory Data Analysis**
 
+NASA & UK MET DATA
+
+_Time Plot_
+
+As evidenced in the first time plot, the data appears to have an upward trend, but it is not clear whether there is seasonality. For time series analysis, the data must be stationary so transformations were investigated to see which could make the data flatter. Thus, the first difference of the data was taken to remove the trend. In this way, the change in data was viewed month to month, rather than the data itself. As evidenced in the second row of graphs, the data is relatively flat with large fluctuations. 
+
+![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/Temp_Per_Month.PNG)
+![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/Change_Temp_Per_Mon.PNG)
 
 
 
