@@ -59,7 +59,7 @@ _Seasonality Plots_
 
 Now that the data appears trend stationary, seasonality was investidated (i.e. if the large fluctuations happen at the same month every year) or if there is no pattern. For this, a seasonality plot was created. As shown below, the data does not appear to have seasonality as temperatures can be higher or lower in the same month depending on the year. 
 
-![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/Seasonality_NASA.PNG)
+![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/Seasonality_NASA1.PNG)
 
 ![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/Seasonality_MET.PNG)
 
