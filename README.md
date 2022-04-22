@@ -93,6 +93,10 @@ Finally, the decomposition of the Kingston data using STL (season and trend usin
 
 ![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/decomposition_Kingston.PNG)
 
+**Metric Selection**
+
+Using the appropriate error metric is a critical decision in this analysis as it will impact how the model is optimized and which model is ultimately selected to create the predictions. To evaluate the accuracy of the model, the mean absolute error (MAE) and root mean squared error (RMSE) metrics were considered as they are reatively easy to calculate and interpret. To compute the MAE, the mean of the absolute differences between actual temperatures and predicted temperatures was taken. To compute the RMSE, the square root of the mean squared errors (the difference between actual temperatures and predicted temperatures) was taken. 
+
 
 
 
