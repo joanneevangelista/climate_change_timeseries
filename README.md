@@ -61,7 +61,7 @@ Now that the data appears trend stationary, seasonality was investidated (i.e. i
 
 ![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/Seasonality_NASA1.PNG)
 
-![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/Seasonality_MET.PNG)
+![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/Seasonality_MET1.PNG)
 
 Another seasonal plot called the subseries plot was also explored. In this graph below, the temperature change in each month (i.e. all the Januarys, Februarys, etc.) is connected with a line which represents the averages. As shown below, there are slight temperature changes each month.
 
