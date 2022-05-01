@@ -181,4 +181,37 @@ The model was re-trained to cover the period of January 1950 to Dec 2007 for bot
 
 In order to predict the following 10 years from 2008 to 2017, the horizon was set to 120 for both NASA and MET. The graphs below capture the predicted temperatures within a confidence interval of 80% to 90%.  
 
+![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/Climate_BET_ARIMA.PNG)
+
+A closer look at the forecasted temperatures for NASA during the 10-year period reveals that temperatures will drop to its lowest point of 14.55441 degrees Celsius in Jan 2008 and keep increasing until a high of 14.75385 in December 2017. On the other hand, MET forecasted temperatures starts with its lowest point of 14.4782 degrees Celsius in Jan 2008 and appears to have some seasonality in the beginning of the forecasted period but eventually flattens out to approximately 14.54 degrees Celsius closer to 2017. 
+
+![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/Climate_Bet_NASA_MET.PNG)
+
+_Testing and Forecast Accuracy_
+
+Using the forecasted temperatures based on the naïve and ARIMA models for the period of January 2008 to December 2017, the predictions were compared to the actual temperatures and the errors for that same period were calculated. As cumulative absolute error was the metric to assess accuracy in the Climate Bet, these results were considered along with the chosen metrics of MAE and RMSE. The result is that the ARIMA models have better forecast accuracy than the naïve model for both NASA and MET data.
+
+![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/Climate_Bet_Results2.PNG)
+
+In the graphs below, the train period (Jan 1950 to Dec 2007) over which the moedel was trained is captured in black, the respective forecasted temperatures for naïve and ARIMA during the test period (Jan 2008 to Dec 2017) are in red and the actual temperatures for the test period are in blue. 
+
+![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/Naive_vs_Actual.PNG)
+
+![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/ARIMA_vs_Actual.PNG)
+
+Based on the analysis above, Armstrong would have lost the bet if the NASA and MET data sets were used. The forecast errors based on the naïve model are greater than the errors using an ARIMA model across multiple metrics. 
+
+**Technical Appendix**
+
+NASA Data: ARIMA Model Residual Plots
+![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/ARIMA_Residual_Plot_NASA.PNG)
+
+UK Met Data: ARIMA Model Residual Plots
+![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/ARIMA_Residual_Plot_UKMET.PNG)
+
+
+
+
+
+
 
