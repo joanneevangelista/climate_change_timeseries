@@ -10,7 +10,7 @@ The objective of this project was to repeat the analysis on the NASA and Met Off
 
 •	Repeat the analysis above using temperature data for Kingston, ON (postal code K7L3N6).
 
-•	Repeat the analysis using the same data but for the time period covered in the infamous bet between University of Pennsylvania Professor J. Scott Armstrong, and former U.S. Vice President, Al Gore and comment. 
+•	Repeat the analysis using the same data but for the time period covered in the infamous Climate Bet between University of Pennsylvania Professor J. Scott Armstrong, and former U.S. Vice President, Al Gore and comment. 
 
 **Data Sources and Preparation**
 
@@ -95,8 +95,90 @@ Finally, the decomposition of the Kingston data using STL (season and trend usin
 
 **Metric Selection**
 
-Using the appropriate error metric is a critical decision in this analysis as it will impact how the model is optimized and which model is ultimately selected to create the predictions. To evaluate the accuracy of the model, the mean absolute error (MAE) and root mean squared error (RMSE) metrics were considered as they are reatively easy to calculate and interpret. To compute the MAE, the mean of the absolute differences between actual temperatures and predicted temperatures was taken. To compute the RMSE, the square root of the mean squared errors (the difference between actual temperatures and predicted temperatures) was taken. 
+Using the appropriate error metric is a critical decision in this analysis as it will impact which model is ultimately selected to create the predictions. To evaluate the accuracy of the model, the mean absolute error (MAE) and root mean squared error (RMSE) metrics were considered as they are reatively easy to calculate and interpret. To compute the MAE, the mean of the absolute differences between actual temperatures and predicted temperatures was taken. To compute the RMSE, the square root of the mean squared errors (the difference between actual temperatures and predicted temperatures) was taken. A difference between these metrics is that RMSE places greater weight to large errors compared to small errors.
 
+**Forecast the global average temperatures through year 2100**
 
+_Assumptions Made:_
+
+•	The benchmark for average global temperature for the baseline 30-year period for NASA sourced data (1951 through 1980) is 14 deg Celsius.
+
+•	For simplicity and consistency purpose, the benchmark for average global temperature for UK Met sourced data (1961 through 1990) was considered to be 14 deg Celsius as well.
+
+•	The data for NASA and MET both start and end at different periods. To keep the dataset the same size for both and use full years, the data was framed from Jan-1950 to Dec-2020.
+
+•	Removing the earlier periods in the data does not have significant impact in time series models, given the weights assigned to earlier years.
+
+•	The anomalies are converted to temperatures with a reference of 14 deg Celsius for both the NASA and the UK Met datasets.
+
+•	A core assumption in time series modelling is the stationarity of data. For the benchmarking models including mean, naïve and seasonal naïve, the non-stationary feature was addressed using the first difference data when evaluating model fit and forecast accuracy. For the ETS, TBATs and ARIMA models, the ets, tbats, auto.arima functions in the forecast package automatically corrected non-stationary mean and variance and returned the best fit models. 
+
+_Modelling Process:_
+
+In order to determine the best fit for our model, several different approaches were investigated including mean, naïve, seasonal naïve, exponential smoothing model (ETS), trigonometric box-cox autoregressive trend seasonality (TBATS) and autoregressive integrated moving average model (ARIMA). Residual diagnostics were performed on each method and the results were analyzed from the residuals time plot, ACF plot and the histogram of residuals. Inspecting residuals was useful for checking whether the model has adequately captured the information in the data. Specifically, when analyzing each of the plots, the following were inspected:
+
+•	Residuals time plot: Residuals from each model were close to zero and the variation of residuals stays similar across the historical data. Thus, the residual mean and variance were constant which is a core assumption for time series models.
+
+•	ACF plot: ideally, there would be no lines extending beyond the 95% confidence intervals (as indicated by the blue lines). If lines extended beyond these confidence intervals, this would indicate that there is information the model is not capturing. 
+
+•	Histogram: the distribution of the residuals appeared to be normal. Thus, it was assumed that the distribution of possible future values follows a normal distribution as well. 
+
+The lowest value of the metrics of MAE and RMSE were used to determine the model with the best fit. For both NASA and MET, the best model turned out to be ARIMA. Refer to the model fit results in the section below and the ARIMA residual diagnostic plots in the Appendix.  
+
+_Forecast accuracy_
+
+For the benchmarking models (mean, naïve and seasonal naïve), the forecast accuracy was determined by pulling a window (i.e. subset) of the data from January 1950 to December 2000 and creating a model based on the data in this period. Then the predictions for the next 20 years were calculated by setting the horizon equal to 240, compared those 20-year predictions to the actual temperatures from January 2001 to December 2020 and calculated the MAE and RMSE. 
+
+For the ETS, TBATs and ARIMA models, time series cross validation was used to assess the forecast accuracy. The forecast horizon was set to 1 and the length of the rolling window to 600 in order to predict data points starting after the year 2000 (there are 50 years between 1950 and 2000 and 12 months in each year). The error of these predictions were computed and used to calculated the MAE and RMSE. 
+
+Refer to the forecast error results for both NASA and MET in the section below. 
+
+NASA Data: Point forecast of temperature from years 2021 through 2100
+![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/NASA_Predictions.PNG)
+
+![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/NASA%20Results.PNG)
+
+Based on the lowest RMSE and MAE scores in the model analysis and the forecast errors, ARIMA was identified as the better suitable model.
+
+UK MET Data: Point forecast of temperature from years 2021 through 2100
+![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/UKMET_Predictions.PNG)
+
+![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/UK%20MET%20Results.PNG)
+
+ARIMA was identifed as the best model for UK MET because it has the lowest RMSE and MAE for model fit and lowest MAE for forecast errors. Although TBATs had a lower RMSE when evaluating for forecast errors, it was not significantly lower than the RMSE under ARIMA.  
+
+NASA and UK MET Data: Point predications as well as the 90% confidence intervals for the global average temperatures for January and July 2030, 2050, and 2100.
+
+![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/NASA_UKMET_Pred_CI.PNG)
+
+Kingston Data: Point predications as well as the 90% confidence intervals for the global average temperatures for January and July 2030, 2050, and 2100.
+
+![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/Kingston_Results.PNG)
+
+**The Climate Bet**
+
+J.Scott Armstrong, a University of Pennsylvania Professor, wanted to make a bet with Al Gore, former U.S. Vice President, regarding future global average temperatures over a ten year period from 2008 to 2017. The purpose was to raise awareness about the application of scientific methods to forecast climate change which could eventually be used to influence public policy. Armstrong predicted that global mean temperature would not change and his forecasts were based on the naïve model. In this case, he used the most recent year’s average temperature as the forecast for each of the years in the future. 
+
+In the end, Gore did not accept the bet so Armstrong used the U.N. Intergovernmental Panel on Climate Change’s Third Assessment Report in 2001 (IPCC) which predicted a 0.3-degree Celsius warming trend to represent Gore’s position and created theclimatebet.com to track the results. The data used for the bet was based on the satellite temperature data from the University of Alabama at Huntsville (UAH) which measures temperature anomalies of the atmospheric layer from the surface to approximately 10 km, centered in the Lower Troposphere. The cumulative absolute error was the metric used to assess forecasting accuracy. 
+
+The 0.159 degrees Celsius is the average anomaly for the year 2007 and represents Armstrong’s baseline for his bet with Gore.
+
+_Model Retraining and Forecasting_
+
+From external research, the ten years of the bet started on January 2008. Thus, the period of forecast was assumed to be from January 2008 to December 2017. Based on the results, the ARIMA model fits the data better than the naïve model as the MAE and RMSE are lower for both the NASA and MET datasets.
+
+![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/Climate_Bet_Results.PNG)
+
+_Naive Model_
+
+Using the naïve model applied by Armstrong, the forecasted temperatures for the 10-year period are predicted to be constant at 14.5 degrees Celsius for NASA and 14.419 degrees Celsius for MET. The graphs below use the actual time series data, however, when calculating the model fit, predictions and forecast errors, the first differenced data was used. As discussed in the exploratory data analysis, the data was transformed by taking the first difference to ensure the data was stationary as this is a core assumption in time series models. While non-stationary mean and variance is automatically corrected for ARIMA models using auto.arima, for naïve models this transformation must be applied seperately. 
+
+![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/Naive_NASA_UKMET.PNG)
+
+_ARIMA Model_
+
+The model was re-trained to cover the period of January 1950 to Dec 2007 for both NASA and MET data. Then, the dataset was converted into a time series object with frequency equal to 12 to capture that there are 12 data points (i.e. months) in each year. Based on the previous analysis, the ARIMA model produced the best fit. Thus, the ARIMA model was fit on the re-shaped NASA and MET datasets. The result was ARIMA (2,1,3)(1,0,0)[12] with drift was the best fit for NASA and ARIMA (4,1,1)(2,0,1)[12] was the best fit for MET. 
+
+In order to predict the following 10 years from 2008 to 2017, the horizon was set to 120 for both NASA and MET. The graphs below capture the predicted temperatures within a confidence interval of 80% to 90%.  
 
 
