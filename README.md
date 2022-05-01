@@ -143,7 +143,7 @@ Based on the lowest RMSE and MAE scores in the model analysis and the forecast e
 
 UK MET Data: Point forecast of temperature from years 2021 through 2100
 
-![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/UKMET_Predictions.PNG)
+![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/UKMET_Predictions1.PNG)
 
 ![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/UK%20MET%20Results.PNG)
 
