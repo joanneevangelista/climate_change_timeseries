@@ -134,6 +134,7 @@ For the ETS, TBATs and ARIMA models, time series cross validation was used to as
 Refer to the forecast error results for both NASA and MET in the section below. 
 
 NASA Data: Point forecast of temperature from years 2021 through 2100
+
 ![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/NASA_Predictions.PNG)
 
 ![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/NASA%20Results.PNG)
@@ -141,6 +142,7 @@ NASA Data: Point forecast of temperature from years 2021 through 2100
 Based on the lowest RMSE and MAE scores in the model analysis and the forecast errors, ARIMA was identified as the better suitable model.
 
 UK MET Data: Point forecast of temperature from years 2021 through 2100
+
 ![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/UKMET_Predictions.PNG)
 
 ![](https://github.com/joanneevangelista/climate_change_timeseries/blob/main/images/UK%20MET%20Results.PNG)
